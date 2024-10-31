@@ -4,7 +4,15 @@
 
 ⇒ which makes it useful for situations where you need to layer views on top of one another.
 
-- More: https://developer.android.com/reference/android/widget/FrameLayout
+- You can, however, add multiple children to a FrameLayout and control their position within the FrameLayout by assigning gravity to each child, using the [`android:layout_gravity`](https://developer.android.com/reference/android/widget/FrameLayout.LayoutParams#attr_android:layout_gravity) attribute
+- Key points about Frame Layouts:
+    - **Single Child View**: `FrameLayout` is designed to hold a single child view. If more than one view is added, they are layered on top of each other in the order they are added.
+    - **Overlaying Views**: It’s commonly used to overlay elements, such as placing a progress spinner on top of an image.
+    - **Positioning**: `FrameLayout` doesn’t allow for direct child positioning. Use `Gravity` attributes to control the position of child views.
+- `FrameLayout` is often used as a container for fragments:
+- More:
+    - https://developer.android.com/reference/android/widget/FrameLayout
+    - https://www.tutorialspoint.com/android/android_frame_layout.htm
 
 ### **Linear Layout**
 
@@ -38,6 +46,38 @@
 - Frame Layout
     
     ```jsx
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    
+        <ImageView
+            android:id="@+id/backgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/sample_background"
+            android:contentDescription="@string/sample_background_image"/>
+    
+        <TextView
+            android:id="@+id/centerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Hello, World!"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"/>
+    
+        <TextView
+            android:id="@+id/badgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:padding="8dp"
+            android:background="@android:color/holo_red_light"
+            android:text="New"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"/>
+    </FrameLayout>
     
     ```
     
