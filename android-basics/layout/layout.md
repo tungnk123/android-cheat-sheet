@@ -10,6 +10,8 @@
     - **Overlaying Views**: It’s commonly used to overlay elements, such as placing a progress spinner on top of an image.
     - **Positioning**: `FrameLayout` doesn’t allow for direct child positioning. Use `Gravity` attributes to control the position of child views.
 - `FrameLayout` is often used as a container for fragments:
+- Holds a single view, but multiple views can be stacked.
+- Use-case: Ideal for displaying one view at a time, like fragments.
 - More:
     - https://developer.android.com/reference/android/widget/FrameLayout
     - https://www.tutorialspoint.com/android/android_frame_layout.htm
@@ -18,6 +20,7 @@
 
 - **LinearLayout** is a view group that aligns all children in a single directioni, vertically or horizontally. You can specify the layout direction with the **`android:orientation`** attribute.
 - **LinearLayout** was commonly used in earlier Android development, but with the introduction of ConstraintLayout, it’s less frequently used in modern apps.
+- Usecase: Perfect for forms or any content that follows a linear progression
 - Common attributes:
     - Orientation: Determines the arrangement of child views.
         - `android:orientation="horizontal"` - Aligns views side-by-side.
@@ -38,10 +41,16 @@
 
 ### **Constraint Layout**
 
+- Create large and complex layouts with a flat view hierarchy.
+- Use-case: Versatile for most UI designs and reduces nesting, which improves performance.
+- More:
+
 ### **Relative Layout**
 
 - A **RelativeLayout** in Android is a type of ViewGroup that allows you to position child views relative to each other or relative to the parent layout. It’s a flexible layout where you can arrange the child views in relation to one another based on certain rules, making it suitable for creating complex UI designs.
 - **RelativeLayout** was commonly used in earlier Android development, but with the introduction of **`ConstraintLayout`**, it’s less frequently used in modern apps.
+- Every view is positioned relative to another view or the parent container.
+- Use-case: Useful when you want a flexible UI without specifying exact positions.
 - More: https://developer.android.com/develop/ui/views/layout/constraint-layout
 
 ### **Grid Layout**
@@ -52,9 +61,13 @@
 
 ### **Motion Layout**
 
-### **Build a flatten Layout**
+### Optimize Layout
 
-- 
+- Use Constraint Layout and Frame Layout instead of other layout for more flat layout
+- Utilize Merge Tags → prevent additional layers of ViewGroup that would bloat your hierarchy
+- Use ViewStub: defer the inflation of views until they are needed
+- Use **include** tags → reuse layouts without adding additional layers
+- More: https://theadityatiwari.medium.com/boost-your-android-apps-performance-with-a-flat-view-hierarchy-21affcd29970
 
 ---
 
@@ -128,6 +141,19 @@
             android:gravity="center" />
     </LinearLayout>
     
+    ```
+    
+- Merge
+    
+    ```jsx
+    <!-- reusable_component.xml -->
+    <merge xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+    </merge>
     ```
     
 
