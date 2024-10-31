@@ -18,6 +18,23 @@
 
 - **LinearLayout** is a view group that aligns all children in a single directioni, vertically or horizontally. You can specify the layout direction with the **`android:orientation`** attribute.
 - **LinearLayout** was commonly used in earlier Android development, but with the introduction of ConstraintLayout, it’s less frequently used in modern apps.
+- Common attributes:
+    - Orientation: Determines the arrangement of child views.
+        - `android:orientation="horizontal"` - Aligns views side-by-side.
+        - `android:orientation="vertical"` - Stacks views on top of each other
+    - Weight: Distributes remaining space among child views based on assigned weights.
+        - Set `android:layout_width` to `0dp` (for horizontal) or `android:layout_height` to `0dp` (for vertical).
+        - Assign `android:layout_weight` with a numeric value to each child
+    - Gravity:
+        - Aligns child views within the LinearLayout.
+        - Default alignment is top-left (start-top).
+    - WeightSum: Space is allocated to child views in the order they are added, potentially causing later views to be hidden if space is insufficient.
+    - ***layout_gravity vs gravity:***
+        - `gravity` affects **content alignment** within a single view → align it content
+        - `layout_gravity` affects **positioning** of a view within its parent → define how a child view is placed inside that container
+- More:
+    - https://developer.android.com/develop/ui/views/layout/linear
+    - https://www.geeksforgeeks.org/linearlayout-and-its-important-attributes-with-examples-in-android/
 
 ### **Constraint Layout**
 
@@ -84,6 +101,32 @@
 - Linear Layout
     
     ```jsx
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="Button 1"
+            android:gravity="center" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Button 2"
+            android:gravity="center" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Button 3"
+            android:gravity="center" />
+    </LinearLayout>
     
     ```
     
