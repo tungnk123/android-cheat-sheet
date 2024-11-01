@@ -63,6 +63,12 @@
 
 ### Optimize Layout
 
+- Why?
+    - **Performance Improvement**: **reduce Measure/Layout Passes and Overdraw**
+    - **Memory Usage**: less overhead for both the View and ViewGroup objects
+    - **Ease of Maintenance**: easy to understand, debug, and maintain
+    - **Improved Layout Performance**:  smoother and faster UI performance
+    - **Reduces Overdraw**: Overdraw occurs when the same pixel is drawn multiple times within a single frame. A flatter hierarchy helps minimize overdraw by reducing overlapping views, which in turn conserves processing power and enhances performance.
 - Use Constraint Layout and Frame Layout instead of other layout for more flat layout
 - Utilize Merge Tags → prevent additional layers of ViewGroup that would bloat your hierarchy
 - Use ViewStub: defer the inflation of views until they are needed
