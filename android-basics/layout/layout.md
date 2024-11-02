@@ -65,6 +65,24 @@
 
 ### **Grid Layout**
 
+- `GridLayout` is a type of layout in Android that arranges child views in a grid-like structure, where you can define the number of rows and columns. It is useful for organizing items in a structured, grid format.
+- Core Attributes
+    - **`rowCount`**: Specifies the number of rows in the grid.
+    - **`columnCount`**: Specifies the number of columns in the grid.
+    - **`layout_row`**: Defines the row position of a child within the grid.
+    - **`layout_column`**: Defines the column position of a child within the grid.
+    - **`layout_rowSpan`**: Allows a child view to span multiple rows.
+    - **`layout_columnSpan`**: Allows a child view to span multiple columns.
+    - **`layout_gravity`**: Controls how the child view aligns within its cell (e.g., `fill`, `center`).
+    - **`layout_columnWeight`**: Specifies how much extra space a column should take compared to others. This works similarly to `layout_weight` in `LinearLayout`.
+- Best Practices
+    - **Use `layout_columnWeight`** if you want the columns to expand proportionally with the screen width.
+    - **Use spans wisely**: Spanning across columns or rows can help create visually engaging layouts but may complicate alignment if overused.
+    - **Set `layout_gravity` carefully** to ensure that child views align well within their cells.
+- More:
+    - [GridLayout](https://developer.android.com/reference/android/widget/GridLayout)
+    - [Medium/android-grid-layout](https://medium.com/google-developer-experts/android-grid-layout-1faf0df8d6f2)
+
 ### **Table Layout**
 
 ### **Coordinator Layout**
@@ -75,7 +93,7 @@
 - As a container for a specific interaction with one or more child views
 - By specifying Behaviors for child views of a CoordinatorLayout you can provide many different interactions within a single parent and those views can also interact with one another. View classes can specify a default behavior when used as a child of a CoordinatorLayout using the DefaultBehavior annotation.
 - More:
-    - https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayout
+    - https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayoutConstriant Layou
     - https://www.digitalocean.com/community/tutorials/android-coordinatorlayout
 
 ### **Motion Layout**
