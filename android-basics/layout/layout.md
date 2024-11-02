@@ -42,8 +42,18 @@
 ### **Constraint Layout**
 
 - Create large and complex layouts with a flat view hierarchy.
+- Constraint Layout is a new ViewGroup for android. The main motive of constraint layout is to design layouts which are flexible and look the same in all screen sizes.
 - Use-case: Versatile for most UI designs and reduces nesting, which improves performance.
+- The layout editor uses constraints to identify the position of a view on the screen.
+- The attributes like `android:layout_constraintTop_toTopOf`, `android:layout_constraintTop_toBottomOf`and other similar attributes are used to set constraints to views w.r.t. other views.
+- It supports **chaining** of views, using which the views can be easily positioned over a space, and works much better than using a combo of weights and gravity to achieve a configuration. The attributes `android:layout_constraintHorizontal_chainStyle` and `android:layout_constraintVertical_chainStyle` can be supplied various values to produce the following effects:
+
+!https://miro.medium.com/v2/resize:fit:936/0*R14qaoRPci9I9Enq.png
+
+- Supports horizontal and vertical bias,by which we can tweak the positioning to favor one side over another using the bias attributes.
+- It also provides a view called `Guideline` using which you can have an imaginary line (which is not a view) anywhere on the screen and position views according to it. You can position this guideline by providing it either a fixed value or a percentage value (w.r.t. the screen).
 - More:
+    - https://developer.android.com/develop/ui/views/layout/constraint-layout
 
 ### **Relative Layout**
 
@@ -58,6 +68,15 @@
 ### **Table Layout**
 
 ### **Coordinator Layout**
+
+- CoordinatorLayout is a super-powered FrameLayout.
+- CoordinatorLayout is intended for two primary use cases:
+- As a top-level application decor or chrome layout
+- As a container for a specific interaction with one or more child views
+- By specifying Behaviors for child views of a CoordinatorLayout you can provide many different interactions within a single parent and those views can also interact with one another. View classes can specify a default behavior when used as a child of a CoordinatorLayout using the DefaultBehavior annotation.
+- More:
+    - https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayout
+    - https://www.digitalocean.com/community/tutorials/android-coordinatorlayout
 
 ### **Motion Layout**
 
@@ -146,6 +165,76 @@
             android:text="Button 3"
             android:gravity="center" />
     </LinearLayout>
+    
+    ```
+    
+- Constraint Layout
+    
+    ```jsx
+    <android.support.constraint.ConstraintLayout ...>
+          <Button android:id="@+id/button" ...
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent/>
+    ```
+    
+- Coordinator Layout
+    
+    ```jsx
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    
+        <!-- AppBarLayout for scrollable toolbar behavior -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    
+            <!-- CollapsingToolbarLayout for collapsing effect -->
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:contentScrim="?attr/colorPrimary">
+    
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/header_image"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax" />
+    
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+    
+        <!-- RecyclerView with scroll behavior -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    
+        <!-- FloatingActionButton with hide-on-scroll behavior -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
+            app:layout_anchor="@id/recycler_view"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+    
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
     
     ```
     
