@@ -1,0 +1,8 @@
+1. weightSum is less than the sum of weights given to the children explicitly
+=> only use weightsum to calculate size => overlapping
+2. The **const** keyword in Kotlin is used for **compile**-time constants, like string or primitive type
+    
+    **Val** in Kotlin is used for runtime constants, allowing the value to be assigned at runtime and
+    computed at **runtime**.
+    
+3. The default visibility modifier in Kotlin is “**internal**.”
