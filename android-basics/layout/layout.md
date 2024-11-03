@@ -85,6 +85,11 @@
 
 ### **Table Layout**
 
+- [`TableLayout`](https://developer.android.com/reference/android/widget/TableLayout) is a [`ViewGroup`](https://developer.android.com/reference/android/view/ViewGroup) that displays child [`View`](https://developer.android.com/reference/android/view/View) elements in rows and columns.
+- [`TableLayout`](https://developer.android.com/reference/android/widget/TableLayout) positions its children into rows and columns. TableLayout containers do not display border lines for their rows, columns, or cells. The table will have as many columns as the row with the most cells. A table can leave cells empty. Cells can span multiple columns, as they can in HTML. You can span columns by using the `span` field in the [`TableRow.LayoutParams`](https://developer.android.com/reference/android/widget/TableRow.LayoutParams) class.
+- More:
+    - https://developer.android.com/guide/topics/ui/layout/grid
+
 ### **Coordinator Layout**
 
 - CoordinatorLayout is a super-powered FrameLayout.
@@ -254,6 +259,36 @@
     
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     
+    ```
+    
+- Table Layout
+    
+    ```jsx
+    <?xml version="1.0" encoding="utf-8"?>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+        <TableRow>
+            <TextView
+                android:text="@string/table_layout_4_open"
+                android:padding="3dip" />
+            <TextView
+                android:text="@string/table_layout_4_open_shortcut"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+    
+        <TableRow>
+            <TextView
+                android:text="@string/table_layout_4_save"
+                android:padding="3dip" />
+            <TextView
+                android:text="@string/table_layout_4_save_shortcut"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+    </TableLayout>
     ```
     
 - Merge
