@@ -103,6 +103,20 @@
 
 ### **Motion Layout**
 
+- [`MotionLayout`](https://developer.android.com/reference/androidx/constraintlayout/motion/widget/MotionLayout) is a layout type that helps you manage motion and widget animation in your app. `MotionLayout` is a subclass of [`ConstraintLayout`](https://developer.android.com/training/constraint-layout) and builds on its rich layout capabilities. As part of the `ConstraintLayout` library, `MotionLayout` is available as a support library.
+- `MotionLayout` bridges the gap between layout transitions and complex motion handling, offering a mix of features between the [property animation framework](https://developer.android.com/guide/topics/graphics/prop-animation), [`TransitionManager`](https://developer.android.com/training/transitions), and [`CoordinatorLayout`](https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayout).
+- `MotionLayout` is fully declarative, meaning you can describe any transitions in XML, no matter how complex.
+- How to use?
+    - **Create a MotionScene:** defines the animation states (start and end) and transitions
+    - Add **transition** and **onSwipe**
+    - Create a Layout XML with MotionLayout
+        
+        
+- More
+    - https://developer.android.com/develop/ui/views/animations/motionlayout
+    - https://www.youtube.com/watch?v=-POu45WaSsc&ab_channel=AndroidDevelopers
+    - https://medium.com/google-developers/introduction-to-motionlayout-part-i-29208674b10d
+
 ### Optimize Layout
 
 - Why?
@@ -289,6 +303,68 @@
                 android:padding="3dip" />
         </TableRow>
     </TableLayout>
+    ```
+    
+- Motion Layout
+    - scene.xml
+        
+        ```jsx
+        <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+                     xmlns:app="http://schemas.android.com/apk/res-auto">
+        
+            <!-- Define two states (start and end) -->
+            <ConstraintSet android:id="@+id/start">
+                <Constraint
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            </ConstraintSet>
+        
+            <ConstraintSet android:id="@+id/end">
+                <Constraint
+                    android:id="@+id/imageView"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </ConstraintSet>
+        
+            <!-- Define a transition between start and end states -->
+            <Transition
+            app:constraintSetStart="@id/start"
+            app:constraintSetEnd="@id/end"
+            app:duration="1000">
+        
+            <OnSwipe
+                app:dragDirection="dragUp"
+                app:touchAnchorId="@id/imageView"
+                app:touchAnchorSide="bottom" />
+        </Transition>
+        </MotionScene>
+        
+        ```
+        
+    - motion-layout.xml
+    
+    ```jsx
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/motionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/scene">
+    
+        <!-- Child views go here -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_foreground"/>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+    
     ```
     
 - Merge
