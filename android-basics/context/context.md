@@ -3,7 +3,6 @@
 - Instantiate components -> Activity, Fragment, Service, Broadcast Receiver
 - Access Components -> access system service, filesystem, resource
 - Communicate components -> access components from another app, use intent-filter
-
 2. UI context vs non-UI context:
 only ContextThemeWrapper is UI context -> Context + Theming
 => use UI context when inflate any XML, your views are themed
@@ -31,7 +30,7 @@ Make sure you do not pass short-living context to long-living objects
 5. this vs getContext() vs getBaseContext() vs getApplicationContext():
 - this = Activity itself => UI context, short-living context
 - getApplicationContext() = application itself => non-UI context, long-living context
-- getBaseContext() = get the base context of the current class
+- getBaseContext() = get the base context of the current class; use with ContextWrapper to get the base context of the ContextWrapper (Don’t use this. It is a code smell)
 6. Memory Leak = view model hold a instance of activity -> Garbage Collector dont collect the instance because
 view model is still living
 7. Activity context -> tied to the lifecycel of activity
@@ -49,3 +48,10 @@ layout, drawables)
     - Use weak references instead of strong references
     - Release activity contexts properly
     - Clean up resources and callbacks
+
+---
+
+**More**
+
+- https://medium.com/@sevbanbuyer/context-in-android-97eda93dc777
+- https://medium.com/free-code-camp/mastering-android-context-7055c8478a22
