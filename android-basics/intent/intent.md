@@ -77,6 +77,67 @@ Here's a comprehensive guide to understanding Android Intents:
     
     ```
     
+- **Setting the Result in the Target Activity**
+    
+    ```jsx
+    val intent = Intent()
+    intent.putExtra("result_key", "some_value")
+    setResult(Activity.RESULT_OK, intent)
+    finish()
+    
+    ```
+    
+
+### Best Practices
+
+- **Use Fragments with Activity Results:** If you’re working within a `Fragment`, register for the result within that Fragment. This lets the Fragment handle its results independently.
+- **Lifecycle-Aware:** Since `registerForActivityResult` is lifecycle-aware, it automatically cleans up and doesn’t leak memory. This is particularly useful if the user navigates away from the calling Activity/Fragment, as it will cancel the result listener.
+- **Data Wrapping:** Bundle your data in a `Parcelable` or `Serializable` object if you need to return complex data types. Using `Intent.putExtras()` with data as simple types or wrapped objects is a good practice for organizing the information being passed back.
+
+### Use Cases
+
+1. **Image/Video Capture:** Start the camera app, capture a photo or video, and receive the result.
+    
+    ```kotlin
+    kotlin
+    Copy code
+    val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success) {
+            // Handle the image URI
+        }
+    }
+    
+    ```
+    
+2. **File Picker:** Launch a file picker to select an image or document, and receive the URI of the selected file.
+    
+    ```kotlin
+    kotlin
+    Copy code
+    val pickFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        // Process the selected file URI
+    }
+    
+    ```
+    
+3. **Permissions:** You can use `ActivityResultContracts.RequestPermission` to request a single permission, or `ActivityResultContracts.RequestMultiplePermissions` for multiple permissions, handling the response within the callback.
+    
+    ```kotlin
+    kotlin
+    Copy code
+    val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            // Permission granted, proceed with the action
+        } else {
+            // Permission denied, handle gracefully
+        }
+    }
+    
+    ```
+    
+4. **Data Collection Activities:** When you have a form or settings activity and want to pass data back to the calling activity after the user fills in information or updates settings.
+
+The new Activity Result API is versatile and works with various built-in `ActivityResultContracts`, improving type safety and reducing boilerplate code. It’s also integrated smoothly with AndroidX libraries and components, making it the recommended approach for activity result handling.
 
 ### 6. **Intent Filters and Action Matching**
 
