@@ -1,5 +1,13 @@
 Intents in Android are fundamental components for communication between different components (such as activities, services, and broadcast receivers) or even between applications. They allow for data to be passed or actions to be initiated, making them essential in creating a cohesive user experience across apps.
 
+An [`Intent`](https://developer.android.com/reference/android/content/Intent) is a messaging object you can use to request an action from another [app component](https://developer.android.com/guide/components/fundamentals#Components)
+
+Three fundamental use cases:
+
+- **Starting an activity**
+- **Starting a service**
+- **Delivering a broadcast**
+
 Here's a comprehensive guide to understanding Android Intents:
 
 ### 1. **Types of Intents**
@@ -242,3 +250,11 @@ intent.putExtras(bundle)
 ### Summary
 
 Intents are a key part of inter-component communication in Android, allowing for activities, services, broadcast receivers, and even cross-app interactions. Mastering both explicit and implicit intents, passing data between components, using intent filters for implicit actions, and applying PendingIntents for deferred actions are all essential for building interactive Android applications.
+
+---
+
+**More:**
+
+- https://developer.android.com/guide/components/intents-filters
+- https://medium.com/@huseyinozkoc/all-things-you-need-to-know-about-intent-in-android-development-cb299b6b5918
+- https://proandroiddev.com/knowing-androids-intent-and-using-intent-97348bfb8a45
