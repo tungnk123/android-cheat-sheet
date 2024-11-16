@@ -6,6 +6,9 @@
     - Summary: https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29
     - Summary: https://github.com/JuanCrg90/Clean-Code-Notes
     - Summary by me: [https://www.notion.so/Clean-Code-1146beb34dd1807fa36ffecd0e0ea29d?pvs=4](https://www.notion.so/Clean-Code-1146beb34dd1807fa36ffecd0e0ea29d?pvs=21)
+3. Android Design Patterns and Best Practice
+   - Link book: https://github.com/TusharKukra/Technology-eBooks-Free/blob/master/Android/Android-Design-Patterns-and-Best-Practice.pdf
+   - Summary by me: 
 
 ---
 
