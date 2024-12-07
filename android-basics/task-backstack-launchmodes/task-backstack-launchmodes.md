@@ -47,6 +47,198 @@ The **back stack** is a last-in, first-out (LIFO) structure that holds the seque
 
 ---
 
+### Key Differences
+
+| **Mode** | **Instances Allowed** | **Task Behavior** | **Method Called on Reuse** |
+| --- | --- | --- | --- |
+| `standard` | Multiple | Added to the same or new task | N/A |
+| `singleTop` | Single if on top; else multiple | Added to the same task | `onNewIntent()` |
+| `singleTask` | Single | Clears other activities in task | `onNewIntent()` |
+| `singleInstance` | Single | Isolated in its own task | `onNewIntent()` |
+
+---
+
+Let's illustrate Android **launch modes** with examples and their effects on the **back stack**. Assume the following activities exist in the app:
+
+- **A**: Home activity
+- **B**: Details activity
+- **C**: Profile activity
+- **D**: Settings activity
+
+### 1. **`standard` (Default)**
+
+- **Scenario**:
+    
+    Start `A → B → C → B → D`.
+    
+- **Back Stack**:
+    
+    ```
+    A → B → C → B → D
+    
+    ```
+    
+- **Behavior**:
+    - Each time you start an activity, a new instance is created and added to the stack.
+    - Pressing **Back** goes step-by-step in reverse order: `D → B → C → B → A`.
+- **Example Use Case**:
+    
+    Opening a list of items (Activity A), clicking on different items to show details (Activity B).
+    
+
+---
+
+### 2. **`singleTop`**
+
+- **Scenario**:
+    
+    Start `A → B → C → B` (where `B` is at the **top of the stack**).
+    
+- **Back Stack**:
+    
+    ```
+    A → B → C → B
+    
+    ```
+    
+- **Modified Scenario**:
+    
+    Start `A → B → C → B` with `B` already on top. The existing instance of `B` handles the intent (`onNewIntent()` is called), so the stack remains:
+    
+    ```
+    A → B → C
+    
+    ```
+    
+- **Behavior**:
+    - If the activity is already on top of the stack, a new instance is **not created**.
+    - If it’s **not on top**, a new instance is added to the stack.
+    - Pressing **Back** follows the stack: `C → B → A`.
+- **Example Use Case**:
+    
+    Notification clicks that navigate back to a previously opened activity without duplicating it.
+    
+
+---
+
+### 3. **`singleTask`**
+
+- **Scenario**:
+    
+    Start `A → B → C → D`, then launch `A` again with `singleTask`.
+    
+- **Back Stack Before Launch**:
+    
+    ```
+    A → B → C → D
+    
+    ```
+    
+- **After Launch**:
+    
+    ```
+    A
+    
+    ```
+    
+- **Behavior**:
+    - Only one instance of `A` exists.
+    - When `A` is launched, it clears all other activities (`B, C, D`) from the stack.
+    - The existing instance of `A` handles the intent (`onNewIntent()` is called).
+- **Example Use Case**:
+    
+    Home activity or a Login screen that serves as the entry point of the app.
+    
+
+---
+
+### 4. **`singleInstance`**
+
+- **Scenario**:
+    
+    Start `A → B → C`, then launch `D` with `singleInstance`.
+    
+- **Back Stack**:
+    
+    ```
+    A → B → C
+    
+    D (in a separate task)
+    
+    ```
+    
+- **Behavior**:
+    - `D` is launched in a **separate task**.
+    - If `D` is launched again, it reuses the same instance (`onNewIntent()` is called).
+    - Pressing **Back** from `D` takes you to the **home screen** (not back to `A → B → C`).
+- **Example Use Case**:
+    
+    A video player in picture-in-picture mode or a dialog-like screen.
+    
+
+---
+
+### Example Code for Launch Modes
+
+```xml
+<activity
+    android:name=".ActivityA"
+    android:launchMode="standard" />
+
+<activity
+    android:name=".ActivityB"
+    android:launchMode="singleTop" />
+
+<activity
+    android:name=".ActivityC"
+    android:launchMode="singleTask" />
+
+<activity
+    android:name=".ActivityD"
+    android:launchMode="singleInstance" />
+
+```
+
+---
+
+### Visual Representation
+
+### Standard:
+
+```
+Back Stack: A → B → C → B → D
+Back Press Order: D → B → C → B → A
+
+```
+
+### SingleTop:
+
+```
+Back Stack: A → B → C → B (No duplicate if B is at the top)
+Back Press Order: C → B → A
+
+```
+
+### SingleTask:
+
+```
+Back Stack Before: A → B → C → D
+Back Stack After Launching A: A
+Back Press Order: A → Exit
+
+```
+
+### SingleInstance:
+
+```
+Back Stack: A → B → C
+Separate Task: D
+Back Press Order: From D → Home
+
+```
+
+These scenarios demonstrate how different launch modes interact with the back stack and affect navigation flow. Let me know if you'd like more detailed examples or behaviors!
+
 ### 3. Task Affinities
 
 **Task Affinity** is a way to specify which task an activity should belong to. By default, all activities in an app have the same affinity, which means they belong to the same task. However, you can assign a custom affinity to an activity using the `taskAffinity` attribute in the manifest.
