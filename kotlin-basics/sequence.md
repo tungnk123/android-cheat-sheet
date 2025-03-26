@@ -1,0 +1,2 @@
+1. [Measuring sequences](https://blog.kotlin-academy.com/measuring-sequences-6536db14d576)
+2. [Sequence optimizations: how my code got into kotlin](https://medium.com/proandroiddev/sequence-optimizations-how-my-code-got-into-kotlin-bc6051262d8e)
