@@ -11,3 +11,4 @@
 3. https://i-love-coding.medium.com/how-does-okhttp-cache-works-851d37dd29cd
 4. https://web.dev/articles/http-cache
 5. https://www.youtube.com/watch?v=H_t-0v1ib38
+6. [Stop Re-fetching Data: Master LRU Caching in Your Android App](https://freedium.cfd/https://medium.com/android-alchemy/stop-re-fetching-data-master-lru-caching-in-your-android-app-47759f6d29ad)
