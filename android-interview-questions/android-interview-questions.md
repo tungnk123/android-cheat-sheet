@@ -7,6 +7,8 @@
 5. companion object vs object
 6. MVVM vs MVI vs Clean Architecture
 7. State hoisting in Jetpack Compose
+8. Declarative vs imperative programming
+9. OOP vs Functional programming
 
 ## Articles
 
@@ -20,4 +22,5 @@
 8. [🌊🔝My Job Interview Experience : Senior Android Developer Role💥](https://freedium.cfd/https://medium.com/@niranjanky14/my-job-interview-experience-senior-android-developer-role-a1026a2daeb4)
 
 ## Another Resources:
+
 1. [Android Interview Questions and Answers](https://github.com/amitshekhariitbhu/android-interview-questions)
