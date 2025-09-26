@@ -70,6 +70,29 @@ We get to decide which code is shared and which is implemented truly natively
 
 ⇒ KMP modules define multiple source sets, each containing an **isolated** part of the module’s code for a specific platform
 
+- The shared module uses Gradle as the build system just like the rest of the project. You can declare **common** and **platform-specific dependencies** using **sourcesets**.
+- For example, if your app uses Ktor for networking, you need to add an OkHttp dependency for Android and a darwin dependency for iOS
+
+```kotlin
+sourceSets {
+   commonMain.dependencies {
+       //put your multiplatform dependencies here
+       //...
+       implementation(libs.ktor.client.core)
+       implementation(libs.ktor.client.content.negotiation)
+       implementation(libs.ktor.serialization.kotlinx.json)
+       //...
+   }
+   androidMain.dependencies {
+       implementation(libs.ktor.client.okhttp)
+   }
+   iosMain.dependencies {
+       implementation(libs.ktor.client.darwin)
+   }
+}
+
+```
+
 ## Source set Tree
 
 - Source Set vs Module
@@ -85,3 +108,100 @@ We get to decide which code is shared and which is implemented truly natively
 ## Who is KMP right for?
 
 - Native android developers → build separate native apps
+
+## **Multiplatform Jetpack libraries**
+
+| **Maven Group ID** | **Latest Update** | **Stable Release** | **Release Candidate** | **Beta Release** | **Alpha Release** | **Documentation** |
+| --- | --- | --- | --- | --- | --- | --- |
+| [annotation (*)](https://developer.android.com/jetpack/androidx/releases/annotation) | July 16, 2025 | [1.9.1](https://developer.android.com/jetpack/androidx/releases/annotation#annotation-1.9.1) | - | - | - |  |
+| [collection](https://developer.android.com/jetpack/androidx/releases/collection) | August 27, 2025 | [1.5.0](https://developer.android.com/jetpack/androidx/releases/collection#1.5.0) | - | - | [1.6.0-alpha01](https://developer.android.com/jetpack/androidx/releases/collection#1.6.0-alpha01) |  |
+| [datastore](https://developer.android.com/jetpack/androidx/releases/datastore) | May 20, 2025 | [1.1.7](https://developer.android.com/jetpack/androidx/releases/datastore#1.1.7) | - | - | [1.2.0-alpha02](https://developer.android.com/jetpack/androidx/releases/datastore#1.2.0-alpha02) | [Documentation](https://developer.android.com/kotlin/multiplatform/datastore) |
+| [lifecycle (*)](https://developer.android.com/jetpack/androidx/releases/lifecycle) | September 24, 2025 | [2.9.4](https://developer.android.com/jetpack/androidx/releases/lifecycle#lifecycle-*-2.9.4) | - | - | [2.10.0-alpha04](https://developer.android.com/jetpack/androidx/releases/lifecycle#lifecycle-*-2.10.0-alpha04) |  |
+| [paging (*)](https://developer.android.com/jetpack/androidx/releases/paging) | September 10, 2025 | [3.3.6](https://developer.android.com/jetpack/androidx/releases/paging#paging-*-3.3.6) | - | - | [3.4.0-alpha04](https://developer.android.com/jetpack/androidx/releases/paging#paging-*-3.4.0-alpha04) |  |
+| [room](https://developer.android.com/jetpack/androidx/releases/room) | September 24, 2025 | [2.8.1](https://developer.android.com/jetpack/androidx/releases/room#2.8.1) | - | - | - | [Documentation](https://developer.android.com/kotlin/multiplatform/room) |
+| [savedstate](https://developer.android.com/jetpack/androidx/releases/savedstate) | September 17, 2025 | [1.3.3](https://developer.android.com/jetpack/androidx/releases/savedstate#1.3.3) | - | - | [1.4.0-alpha03](https://developer.android.com/jetpack/androidx/releases/savedstate#1.4.0-alpha03) |  |
+| [sqlite](https://developer.android.com/jetpack/androidx/releases/sqlite) | September 24, 2025 | [2.6.1](https://developer.android.com/jetpack/androidx/releases/sqlite#2.6.1) | - | - | - | [Documentation](https://developer.android.com/kotlin/multiplatform/sqlite) |
+
+## Set up Jetpack Libraries for KMP
+
+### ViewModel
+
+<aside>
+💡
+
+**Note:** ViewModel supports KMP in versions 2.8.0 and higher.
+
+</aside>
+
+- [Set up ViewModel for KMP](https://developer.android.com/kotlin/multiplatform/viewmodel)
+- To set up the KMP ViewModel in your project, define the dependency in the **`libs.versions.toml`** file:
+    
+    ```
+    [versions]
+    androidx-viewmodel = 2.9.4
+    
+    [libraries]
+    androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-viewmodel" }
+    
+    ```
+    
+- And then add the artifact to the **`build.gradle.kts`** file for your KMP module and declare the dependency as **`api`**, because this dependency will be exported to the binary framework:
+    
+    ```
+    // You need the "api" dependency declaration here if you want better access tto the classes from Swift code.
+    commonMain.dependencies {
+      api(libs.androidx.lifecycle.viewmodel)
+    }
+    ```
+    
+- **CommonViewModel =** The Android [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) approach to building UI can be implemented in common code using Compose Multiplatform.
+    
+    <aside>
+    💡
+    
+    **Note:** JetBrains also provides a dependency for a [Common ViewModel](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-viewmodel.html#using-viewmodel-in-common-code). This dependency is only required if you want to retrieve a ViewModel in [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/).
+    
+    </aside>
+    
+- **Export ViewModel APIs for access from Swift**
+    - By default, any library that you add to your codebase won't be automatically exported to the binary framework. If the APIs aren't exported, they are available from the binary framework only if you use them in the shared code (from the **`iosMain`** or **`commonMain`** source set).
+    - To improve the experience, you can export the ViewModel dependency to the binary framework using the **`export`** setup in the **`build.gradle.kts`** file where you define the iOS binary framework, which makes the ViewModel APIs accessible directly from the Swift code the same as from Kotlin code
+- **Using `viewModelScope` on JVM Desktop**
+    - When running coroutines in a ViewModel, the **`viewModelScope`** property is tied to the **`Dispatchers.Main.immediate`**, which might be unavailable on desktop by default. To make it work correctly, add the **`kotlinx-coroutines-swing`** dependency to your project:
+        
+        ```
+        // Optional if you use JVM Desktop
+        desktopMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:[KotlinX Coroutines version]")
+        }
+        
+        ```
+        
+    - See the [**`Dispatchers.Main`** documentation](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html) for more details.
+- **Use ViewModel from `commonMain` or `androidMain`**
+    - There is no specific requirement for using the ViewModel class in the shared **`commonMain`**, nor from the **`androidMain`** sourceSet.
+    - The only consideration is you can't use any platform-specific APIs and you need to abstract them.
+- **Use ViewModel from SwiftUI**
+    - On Android, the ViewModel lifecycle is automatically handled and scoped to a **`ComponentActivity`**, **`Fragment`**, **`NavBackStackEntry`** (Navigation 2), or **`rememberViewModelStoreNavEntryDecorator`** (Navigation 3).
+    - SwiftUI on iOS, however, has no built-in equivalent for the AndroidX ViewModel.
+    - **Create a function to help with generics**
+    - **Connect ViewModel scope to SwiftUI Lifecycle**
+
+### Room Database
+
+### **Not Available in Kotlin Multiplatform**
+
+Some of the APIs that are available on Android are not available in Kotlin Multiplatform.
+
+### **Integration with Hilt**
+
+Because [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) is not available for Kotlin Multiplatform projects, you can't directly use ViewModels with **`@HiltViewModel`** annotation in **`commonMain`** sourceSet. In that case you need to use some alternative DI framework, for example, [Koin](https://insert-koin.io/), [kotlin-inject](https://github.com/evant/kotlin-inject), [Metro](https://zacsweers.github.io/metro/), or [Kodein](https://kosi-libs.org/kodein). You can find all the DI frameworks that work with Kotlin Multiplatform at [klibs.io](https://klibs.io/?query=dependency+injection).
+
+### **Observe Flows in SwiftUI**
+
+Observing coroutines Flows in SwiftUI is not directly supported. However, you can either use [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) or [SKIE](https://skie.touchlab.co/) library to allow this feature.
+
+## Reference
+
+1. [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+2. [Kotlin Multiplatform Overview](https://developer.android.com/kotlin/multiplatform)
