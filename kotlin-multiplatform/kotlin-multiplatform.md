@@ -90,8 +90,12 @@ sourceSets {
        implementation(libs.ktor.client.darwin)
    }
 }
-
 ```
+
+- **Interface in common shared code, implementation in native code (Android or Swift).**
+    - In some cases you need to write code that isn't available from KMP code. In this situation you can define an `interface` in `shared` code, `implement` it for Android in Kotlin, and provide an iOS counterpart in Swift.
+    - Typically, the **native implementations** are then **injected** into the **shared** code, either by **dependency injection** or directly.
+    - This strategy allows for a customized experience on each platform while maintaining a `common` interface for shared code.
 
 ## Source set Tree
 
