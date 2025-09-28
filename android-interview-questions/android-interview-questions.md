@@ -21,6 +21,7 @@
 7. [Most Asked System Design Questions for Android Developers](https://medium.com/@YodgorbekKomilo/most-asked-system-design-questions-for-android-developers-dac6be53d311)
 8. [🌊🔝My Job Interview Experience : Senior Android Developer Role💥](https://freedium.cfd/https://medium.com/@niranjanky14/my-job-interview-experience-senior-android-developer-role-a1026a2daeb4)
 9. [All-in-One Android Interview Preparation Guide (DSA + Kotlin + System Design + Architecture +…](https://freedium.cfd/https://blog.stackademic.com/all-in-one-android-interview-preparation-guide-dsa-kotlin-system-design-architecture-f9102719b172)
+10. [Cracking Android Interviews: The Questions That Actually Matter (With Real Answers)](https://freedium.cfd/https://abhinay212.medium.com/cracking-android-interviews-the-questions-that-actually-matter-with-real-answers-9a29a66cd878)
 
 ## Another Resources:
 
