@@ -205,6 +205,11 @@ Because [Hilt](https://developer.android.com/training/dependency-injection/hilt
 
 Observing coroutines Flows in SwiftUI is not directly supported. However, you can either use [KMP-NativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines) or [SKIE](https://skie.touchlab.co/) library to allow this feature.
 
+## Navigation
+
+- [Master Kotlin Multiplication navigation with Decompose — Part 1](https://medium.com/@yeldar.nurpeissov/using-kmp-with-decompose-839dae885c15)
+- [Master Kotlin Multiplatform with Decompose — Part 2: Dependency Injection, Kodein, Koin](https://medium.com/@yeldar.nurpeissov/master-kotlin-multiplatform-navigation-with-decompose-add-di-with-kodein-and-koin-405462b2691b)
+
 ## Reference
 
 1. [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
