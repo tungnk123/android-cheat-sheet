@@ -42,6 +42,8 @@
 
 ### Apollo
 
+- [GraphQL in Android](https://freedium-mirror.cfd/https://medium.com/@anandgaur2207/graphql-in-android-107947af5c95)
+
 ## Best practices
 
 ### Best Practices of Retrofit and OkHttp in Android Development
