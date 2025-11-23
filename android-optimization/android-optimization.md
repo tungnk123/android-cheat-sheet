@@ -18,4 +18,8 @@
 5. https://www.youtube.com/watch?v=H_t-0v1ib38
 6. [Stop Re-fetching Data: Master LRU Caching in Your Android App](https://freedium.cfd/https://medium.com/android-alchemy/stop-re-fetching-data-master-lru-caching-in-your-android-app-47759f6d29ad)
 
+## Crash
+
+1. [How We Reduced Android App Crashes by 95%](https://trricho.medium.com/how-we-reduced-android-app-crashes-by-95-e89542dbe517)
+
 [Mad skills Performance](https://www.notion.so/Mad-skills-Performance-1db6beb34dd18084b055ccc455539ed7?pvs=21)
