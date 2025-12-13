@@ -3,6 +3,11 @@
 1. [**15 Ways to Improve Android App Startup Time**](https://medium.com/@androidlab/15-ways-to-improve-android-app-startup-time-e29bba6c5a2d)
 2. 
 
+## Offline-first app (HARD)
+
+1. [Build an offline-first app](https://developer.android.com/topic/architecture/data-layer/offline-first)
+2. [I Tried Making My App 100% Offline-First. The Sync Issues Nearly Destroyed the Project](https://medium.com/@avula.koti.realpage/i-tried-making-my-app-100-offline-first-the-sync-issues-nearly-destroyed-the-project-e5378a5f7ce4)
+
 ## Performance
 
 1. https://developer.android.com/topic/performance/improving-overview
