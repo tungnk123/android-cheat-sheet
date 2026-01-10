@@ -24,6 +24,8 @@
 10. [All-in-One Android Interview Preparation Guide (DSA + Kotlin + System Design + Architecture +…](https://freedium.cfd/https://blog.stackademic.com/all-in-one-android-interview-preparation-guide-dsa-kotlin-system-design-architecture-f9102719b172)
 11. [Cracking Android Interviews: The Questions That Actually Matter (With Real Answers)](https://freedium.cfd/https://abhinay212.medium.com/cracking-android-interviews-the-questions-that-actually-matter-with-real-answers-9a29a66cd878)
 12. [Cracking Senior Android Developer Interviews: The What & Why Behind Real-World Questions](https://freedium-mirror.cfd/https://medium.com/@anandgaur2207/cracking-senior-android-developer-interviews-the-what-why-behind-real-world-questions-b5601b259696)
+13. [How to Pass Leetcode Interviews: The Ritual That Works](https://medium.com/proandroiddev/how-to-pass-leetcode-interviews-the-ritual-that-works-a788ff2f4f27)
+14.  [Cracking Android SDE2/SDE3 Interviews in 2026: Deep Dives, Code, Follow-ups | Part- 1](https://medium.com/@vikasacsoni9211/cracking-android-sde2-sde3-interviews-in-2026-deep-dives-code-follow-ups-8a6edcd9e6d0)
 
 ## Another Resources:
 
