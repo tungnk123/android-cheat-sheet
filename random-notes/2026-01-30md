@@ -1,0 +1,32 @@
+
+---
+1. What are generics, and what is the role of type erasure in Kotlin?
+	- Inside a generic function, we **don’t know what T is** anymore (because of _type erasure_).
+	- Because Kotlin removes (erases) the type `T` at runtime, it’s only known at compile-time.
+	- _The reason behind_ **_type erasure_**_, the JVM performs this to maintain **the_ backward compatibility _of Java._**
+	- : a) **inline**: it tells Kotlin to copy the code of the function wherever it’s used.  
+	- : b) **reified**: tells Kotlin to _keep the type information_ of T even at runtime.
+	- By using **Type Erasure**, the Java team ensured that:
+		- **Old code** could talk to **New code**.
+		- The **Bytecode** remained largely the same.
+	- Before: Java dont have generic -> just know List
+	- The decision was pragmatic. By choosing erasure, Java 5 was able to launch with a "Binary Compatibility" guarantee.
+	- Because of erasure, the JVM only needs **one** class file for `ArrayList`.
+	- **In Java:** `ArrayList<String>` and `ArrayList<Integer>` both share the same `ArrayList.class` file at runtime.
+2. **Idempotent** (`IF NOT EXISTS`) → safe on upgrades
+3. Over 126,000 Tech Jobs Gone in 2025 — Here's Exactly Which Skills Are Now Untouchable
+	- Skill #1: Systems thinking (the kind that hurts your brain)
+		- understood **how everything breaks**.
+		- Learn design system
+	- Skill #2: Owning production (not just pushing code)
+		- Learn observability (metrics, logs, traces — all three)
+	- Skill #3: Data engineering beats data "analysis"
+	- Skill #4: Cloud cost control (the least sexy superpower)
+		- Right-size instances, Kill zombie resources, Optimize queries
+	- Skill #5: Security literacy (not just "best practices")
+	- Skill #6: AI as leverage, not identity
+		- To debug faster, To generate test cases, To explore edge cases
+	- Skill #7: Clear thinking under pressure
+		- Ask the right question, Choose the least-worst option, Communicate clearly
+4. She spends most time reading existing code. Understanding problems. Planning approaches. 
+	- Understand requirements -> Planing -> Design doc -> Code -> Test
